@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    aws:
+      region:
+        static: ap-south-1
+      endpoint: http://localhost:4566
+aws:
+  sqs:
+    region: ap-south-1
+    endpoint: http://localhost:4566
+    polling-duration: 10
+    message-count: 2
+    queue-url: http://localhost:4566/000000000000/order
+
+
+
