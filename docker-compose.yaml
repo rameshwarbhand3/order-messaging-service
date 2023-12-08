@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: "localstack"
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"            
+    environment:
+      - DEBUG=1
+      - LOCALSTACK_HOSTNAME=localhost
+      - TEST_AWS_ACCOUNT_ID=000000000000
+      - AWS_DEFAULT_REGION=ap-south-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      -  /var/run/docker.sock:/var/run/docker.sock
+  
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - order-messaging-service-data:/var/lib/mongo
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
+
+  order-publisher-service:
+    build: order-publisher-service/.
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - localstack
+    
+        
+  order-processor-service:
+    build: order-processor-service/.
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb
+    environment:
+      SPRING_DATA_MONGODB_URL: mongodb://root:root@localhost:27017
+      SPRING_DATA_MONGODB_DATABASE: orderDb
