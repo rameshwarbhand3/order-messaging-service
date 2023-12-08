@@ -3,12 +3,14 @@ package com.ram.service.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @Builder
 @Getter
 @Setter
+@Document("orderItems")
 public class Order {
     private String orderId;
     private String customerId;
@@ -36,6 +38,17 @@ public class Order {
         private int quantity;
         private int price;
         private String description;
+
+        @Override
+        public String toString() {
+            return "OrderItem{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", quantity=" + quantity +
+                    ", price=" + price +
+                    ", description='" + description + '\'' +
+                    '}';
+        }
     }
 
     public enum OrderStatus {

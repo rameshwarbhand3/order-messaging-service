@@ -6,13 +6,16 @@ spring:
       region:
         static: ap-south-1
       endpoint: http://localhost:4566
+
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017
+      database: orderDb
+
 aws:
   sqs:
     region: ap-south-1
     endpoint: http://localhost:4566
     polling-duration: 10
-    message-count: 2
+    number-of-messages-to-fetch: 2
     queue-url: http://localhost:4566/000000000000/order
-
-
-

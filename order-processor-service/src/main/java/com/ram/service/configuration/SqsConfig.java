@@ -14,6 +14,6 @@ public class SqsConfig {
     private String region;
     private String endpoint;
     private Integer pollingDuration;
-    private Integer messageCount;
+    private Integer numberOfMessagesToFetch;
     private String queueUrl;
 }

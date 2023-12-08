@@ -31,7 +31,7 @@ public class SqsService {
         ReceiveMessageRequest receiveMessageRequest = ReceiveMessageRequest.builder()
                 .queueUrl(sqsConfig.getQueueUrl())
                 .waitTimeSeconds(sqsConfig.getPollingDuration())
-                .maxNumberOfMessages(sqsConfig.getMessageCount())
+                .maxNumberOfMessages(sqsConfig.getNumberOfMessagesToFetch())
                 .build();
 
         List<Message> messages = sqsClient.receiveMessage(receiveMessageRequest)
