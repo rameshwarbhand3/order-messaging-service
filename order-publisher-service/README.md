@@ -73,3 +73,8 @@ Note: use your ip address of your local machine endpoint
 ```shell
 aws --region ap-south-1 --endpoint-url=http://localhost:4566 sns subscribe --topic-arn   arn:aws:sns:ap-south-1:000000000000:order  --protocol http --notification-endpoint http://`hostname -I | awk '{print $1}'`:8081/api/orders/notify  --output table
 ```
+
+11. Tp purge(delete) message from queue use following command
+```dockerfile
+
+```
